@@ -1,0 +1,5 @@
+.vagrant/
+*.retry
+*.out
+*.log
+.imported_roles/

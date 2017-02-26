@@ -1,0 +1,30 @@
+---
+# - name: Add Oracle Java apt repositories
+#   apt_repository: repo={{ item }} state=present
+#   with_items:
+#     - deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main
+#     - deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main
+
+# - name: Add Oracle Java apt keys
+#   apt_key: 
+#     keyserver: hkp://keyserver.ubuntu.com:80
+#     id: EEA14886
+
+# - name: Install Oracle Java dependencies
+#   apt: name={{ item }} update_cache=yes
+#   with_items:
+#     - oracle-java8-installer
+#     - oracle-java8-set-default
+
+- name: Add openHAB apt key
+  apt_key: url=https://bintray.com/user/downloadSubjectPublicKey?username=openhab state=present
+
+- name: Add openHAB apt repository
+  apt_repository: repo="deb http://dl.bintray.com/openhab/apt-repo2 stable main" state=present
+
+- name: Install openHAB
+  apt: name={{ item }} state=present
+  with_items:
+    - openhab2
+    - openhab2-addons
+  notify: restart openhab2

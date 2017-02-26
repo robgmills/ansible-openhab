@@ -1,0 +1,3 @@
+---
+- name: restart openhab2
+  service: name=openhab2 state=restarted
